@@ -34,20 +34,66 @@ class SinglyLinkedList {
 
     this.tail = prev;
     this.tail.next = null;
+    this.length--;
+
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return current;
+  }
+  shift() {
+    if (this.head === null) return undefined;
+
+    let firstItem = this.head;
+    this.head = firstItem.next;
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+
+    return firstItem;
+  }
+  unshift(val) {
+    const newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+
+    return this;
+  }
+  get(index) {
+
+    if (index < 0 || index > this.length) {
+      return null;
+    }
+    let i = 0;
+    let current = this.head;
+    while (i !== index) {
+      i++;
+      current = current.next;
+    }
+
+    return current;
   }
   traverse() {
     var current = this.head;
     while (current) {
-      console.log(current.val);
       current = current.next;
     }
   }
 }
 
 var list = new SinglyLinkedList();
+
 list.push(1);
 list.push(2);
 list.push(3);
-list.push(4);
-list.pop();
-list.traverse()
+console.log(list.get(1))
