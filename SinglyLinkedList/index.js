@@ -76,8 +76,8 @@ class SinglyLinkedList {
     let i = 0;
     let current = this.head;
     while (i !== index) {
-      i++;
       current = current.next;
+      i++;
     }
 
     return current;
@@ -90,6 +90,35 @@ class SinglyLinkedList {
     }
 
     return false;
+  }
+  insert(index, val) {
+    if (index < 0 || index >= this.length) return null;
+    if (index === this.length) {
+      this.push(val);
+      return true;
+    }
+
+    if (index === 0) {
+      this.unshift(val);
+      return true;
+    }
+    let newNode = new Node(val);
+    let prev = this.get(index - 1);
+    let current = prev.next;
+    prev.next = newNode;
+    newNode.next = current;
+    this.length++;
+    return true;
+  }
+  remove(index) {
+    if (index < 0 || index >= this.length) return null;
+    if (index === this.length - 1) return this.pop();
+    if (index === 0) return this.shift();
+    const prev = this.get(index - 1);
+    let removed = prev.next;
+    prev.next = removed.next;
+    this.length--;
+    return removed;
   }
   traverse() {
     var current = this.head;
