@@ -126,6 +126,18 @@ class SinglyLinkedList {
       current = current.next;
     }
   }
+  reverse(){
+   let current = this.head
+   let prev= null
+   while(current){
+     let next = current.next
+     current.next=prev
+     prev=current
+     current=next
+   }
+   this.head=prev
+   return this
+  }
 }
 
 var list = new SinglyLinkedList();
@@ -133,4 +145,4 @@ var list = new SinglyLinkedList();
 list.push(1);
 list.push(2);
 list.push(3);
-console.log(list.get(1));
+console.log(list)
